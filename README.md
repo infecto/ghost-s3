@@ -18,6 +18,7 @@ In your ghost config.js file under "development" and "production" add
 	    secretAccessKey: 'your AWS secret access key>',
 	    bucket: 'your-bucket-name',
 	    region: 'the AWS region your bucket is in'
+	    cloudFrontUrl: 'optional setting for Cloud Front Support'
 	},
 
 

@@ -33,7 +33,7 @@ module.exports.save = function(image) {
 
     var targetDir = getTargetDir();
     var targetFilename = getTargetName(image, targetDir);
-    var awsPath = 'https://' + config.bucket + '.s3.amazonaws.com/';
+    var awsPath = 'https://' + config.bucket + config.region + '.amazonaws.com/';
 
     return readFile(image.path)
     .then(function(buffer) {
@@ -51,7 +51,12 @@ module.exports.save = function(image) {
         return unlink(image.path);
     })
     .then(function() {
-        return when.resolve(awsPath + targetFilename);
+        if (typeof config.cloudFrontUrl != 'undefined') {
+            return when.resolve('http://' + config.cloudFrontUrl + targetFilename);
+        } else {
+            return when.resolve(awsPath + targetFilename);
+        }
+
     })
     .catch(function(err) {
         unlink(image.path);

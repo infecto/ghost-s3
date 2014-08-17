@@ -33,7 +33,7 @@ module.exports.save = function(image) {
 
     var targetDir = getTargetDir();
     var targetFilename = getTargetName(image, targetDir);
-    var awsPath = 'https://' + config.bucket + config.region + '.amazonaws.com/';
+    var awsPath = 'https://' + config.bucket + '.' + config.region + '.' + 'amazonaws.com/';
 
     return readFile(image.path)
     .then(function(buffer) {

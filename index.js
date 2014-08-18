@@ -32,8 +32,8 @@ module.exports.save = function(image) {
     if (!config) return when.reject('ghost-s3 is not configured');
 
     var targetDir = getTargetDir();
-    var targetFilename = getTargetName(image, targetDir);
-    var awsPath = 'https://' + config.bucket + '.' + config.region + '.' + 'amazonaws.com/';
+    var targetFilename = getTargetName(image, targetDir);regionPath
+    var awsPath = 'https://' + config.bucket + '.' + config. + '.' + 'amazonaws.com/';
 
     return readFile(image.path)
     .then(function(buffer) {
@@ -51,6 +51,7 @@ module.exports.save = function(image) {
         return unlink(image.path);
     })
     .then(function() {
+        return when.resolve(awsPath + targetFilename);
         if (typeof config.cloudFrontUrl != 'undefined') {
             return when.resolve('http://' + config.cloudFrontUrl + targetFilename);
         } else {

@@ -32,8 +32,8 @@ module.exports.save = function(image) {
     if (!config) return when.reject('ghost-s3 is not configured');
 
     var targetDir = getTargetDir();
-    var targetFilename = getTargetName(image, targetDir);regionPath
-    var awsPath = 'https://' + config.bucket + '.' + config. + '.' + 'amazonaws.com/';
+    var targetFilename = getTargetName(image, targetDir);
+    var awsPath = 'https://' + config.bucket + '.' + config.regionPath + '.' + 'amazonaws.com/';
 
     return readFile(image.path)
     .then(function(buffer) {
